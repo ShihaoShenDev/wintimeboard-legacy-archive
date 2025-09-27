@@ -16,6 +16,7 @@ using Microsoft.UI.Windowing;
 using WinRT.Interop;
 using Microsoft.UI.Dispatching;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,6 +33,22 @@ namespace WinTimeBoard
         public MainWindow()
         {
             InitializeComponent();
+
+            // Populate About information (find TextBlocks inside flyout's content)
+            try
+            {
+                if (MenuButton?.Flyout is Flyout flyout && flyout.Content is FrameworkElement root)
+                {
+                    var nameTb = root.FindName("AppNameText") as TextBlock;
+                    var verTb = root.FindName("AppVersionText") as TextBlock;
+                    if (nameTb != null) nameTb.Text = "WinTimeBoard";
+                    if (verTb != null) verTb.Text = GetApplicationVersion();
+                }
+            }
+            catch
+            {
+                // ignore
+            }
 
             // Make the window fullscreen
             try
@@ -55,6 +72,25 @@ namespace WinTimeBoard
             _timer.Tick += Timer_Tick;
             UpdateTimeAndDate();
             _timer.Start();
+        }
+
+        private string GetApplicationVersion()
+        {
+            try
+            {
+                var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+                var name = assembly.GetName();
+                var version = name.Version;
+                if (version != null)
+                {
+                    return $"Ver {version.ToString()}";
+                }
+            }
+            catch
+            {
+                // ignore
+            }
+            return "Ver 1.0.0";
         }
 
         private void Timer_Tick(object? sender, object e)

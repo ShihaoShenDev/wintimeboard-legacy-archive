@@ -10,14 +10,14 @@
     Title="WinTimeBoard">
 
     <Window.SystemBackdrop>
-        <MicaBackdrop />
+        <MicaBackdrop Kind="BaseAlt" />
     </Window.SystemBackdrop>
 
     <Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock x:Name="TimeText" FontSize="96" FontWeight="Bold" Foreground="Black"/>
-                <TextBlock x:Name="DateText" FontSize="36" Margin="0,8,0,0" Foreground="Black"/>
+                <TextBlock x:Name="TimeText" FontSize="96" FontWeight="Bold" />
+                <TextBlock x:Name="DateText" FontSize="36" Margin="0,8,0,0" />
             </StackPanel>
         </Grid>
 
@@ -29,9 +29,15 @@
                     Width="40"
                     Height="40">
                 <Button.Flyout>
-                    <Flyout Placement="Top">
-                        <StackPanel Padding="8">
-                            
+                    <Flyout Placement="Top" x:Name="MenuFlyout">
+                        <StackPanel  Padding="8">
+                            <!-- 关于 -->
+                            <TextBlock Text="关于" FontSize="28" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <StackPanel Margin="8,0,0,0">
+                                <TextBlock x:Name="AppNameText" Text="🕒 WinTimeBoard" FontSize="24"/>
+                                <TextBlock x:Name="AppVersionText" Text="Ver 1.0.0" Margin="0,4,0,0"/>
+                                <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." Margin="0,8,0,0"/>
+                            </StackPanel>
                         </StackPanel>
                     </Flyout>
                 </Button.Flyout>
