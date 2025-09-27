@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinTimeBoard (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinTimeBoard (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
