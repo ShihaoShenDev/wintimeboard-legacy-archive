@@ -43,14 +43,6 @@
                 </Button.Flyout>
             </Button>
 
-            <Button x:Name="ExitButton"
-                    Click="ExitButton_Click"
-                    FontFamily="Segoe Fluent Icons"
-                    Content="&#xE711;"
-                    Width="40"
-                    Height="40"
-                    />
-
             <Button x:Name="HideButton"
                     Click="HideButton_Click"
                     FontFamily="Segoe Fluent Icons"
@@ -58,6 +50,14 @@
                     Width="40"
                     Height="40"
                     />
+
+            <Button x:Name="ExitButton"
+                    Click="ExitButton_Click"
+                    FontFamily="Segoe Fluent Icons"
+                    Content="&#xE711;"
+                    Width="40"
+                    Height="40"
+            />
         </StackPanel>
     </Grid>
 </Window>
