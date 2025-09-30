@@ -34,7 +34,7 @@
                             <!-- 关于 -->
                             <TextBlock Text="关于" FontSize="28" FontWeight="Bold" Margin="0,0,0,8"/>
                             <StackPanel Margin="8,0,0,0">
-                                <TextBlock x:Name="AppNameText" Text="🕒 WinTimeBoard BETA" FontFamily="Segoe UI SemiBold" FontSize="24"/>
+                                <TextBlock x:Name="AppNameText" Text="WinTimeBoard BETA"/>
                                 <!--<TextBlock x:Name="AppVersionText" Text="Ver 1.0.0" Margin="0,4,0,0"/>-->
                                 <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." Margin="0,8,0,0"/>
                             </StackPanel>
