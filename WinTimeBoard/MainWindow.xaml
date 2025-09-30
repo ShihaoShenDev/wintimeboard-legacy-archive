@@ -43,13 +43,15 @@
                 </Button.Flyout>
             </Button>
 
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12" Spacing="8">
             <Button x:Name="HideButton"
                     Click="HideButton_Click"
                     FontFamily="Segoe Fluent Icons"
                     Content="&#xED1A;"
                     Width="40"
                     Height="40"
-                    />
+            />
 
             <Button x:Name="ExitButton"
                     Click="ExitButton_Click"
