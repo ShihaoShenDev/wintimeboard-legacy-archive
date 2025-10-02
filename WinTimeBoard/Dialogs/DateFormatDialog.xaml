@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="WinTimeBoard.Dialogs.DateFormatDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinTimeBoard.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="日期格式设置"
+    PrimaryButtonText="应用"
+    CloseButtonText="取消"
+    DefaultButton="Primary">
+
+    <StackPanel Spacing="16" MinWidth="380">
+        <TextBlock Text="选择日期显示格式" FontSize="14" />
+        
+        <RadioButtons x:Name="DateFormatRadioButtons" SelectionChanged="DateFormatRadioButtons_SelectionChanged">
+            <RadioButton Content="2025年01月10日 星期五" Tag="yyyy年MM月dd日 dddd" IsChecked="True" />
+            <RadioButton Content="2025-01-10 星期五" Tag="yyyy-MM-dd dddd" />
+            <RadioButton Content="01/10/2025 Friday" Tag="MM/dd/yyyy dddd" />
+            <RadioButton Content="10/01/2025 Friday" Tag="dd/MM/yyyy dddd" />
+            <RadioButton Content="2025年1月10日" Tag="yyyy年M月d日" />
+            <RadioButton Content="2025-1-10" Tag="yyyy-M-d" />
+            <RadioButton Content="01-10" Tag="MM-dd" />
+            <RadioButton Content="自定义格式" Tag="Custom" />
+        </RadioButtons>
+        
+        <!-- 自定义格式输入 -->
+        <StackPanel x:Name="CustomFormatPanel" Visibility="Collapsed" Spacing="8">
+            <TextBox x:Name="CustomFormatTextBox" 
+                     Header="自定义日期格式" 
+                     PlaceholderText="例如: yyyy年MM月dd日 dddd"
+                     TextChanged="CustomFormatTextBox_TextChanged" />
+            <TextBlock Text="格式说明：" FontSize="12" FontWeight="SemiBold" />
+            <TextBlock FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                • yyyy: 四位年份 (2025)
+                <LineBreak/>
+                • yy: 两位年份 (25)
+                <LineBreak/>
+                • MM: 两位月份 (01-12)
+                <LineBreak/>
+                • M: 单位月份 (1-12)
+                <LineBreak/>
+                • dd: 两位日期 (01-31)
+                <LineBreak/>
+                • d: 单位日期 (1-31)
+                <LineBreak/>
+                • dddd: 星期几全名 (星期一)
+                <LineBreak/>
+                • ddd: 星期几简写 (周一)
+            </TextBlock>
+        </StackPanel>
+        
+        <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+        
+        <!-- 预览区域 -->
+        <StackPanel>
+            <TextBlock Text="预览" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8" />
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
+                    CornerRadius="4" Padding="12"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                <TextBlock x:Name="PreviewText" 
+                           Text="2025年01月10日 星期五" 
+                           FontSize="18" 
+                           HorizontalAlignment="Center" />
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

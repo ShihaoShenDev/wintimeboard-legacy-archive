@@ -30,15 +30,72 @@
                     Height="40">
                 <Button.Flyout>
                     <Flyout Placement="Top" x:Name="MenuFlyout">
-                        <StackPanel  Padding="8">
-                            <!-- 关于 -->
-                            <TextBlock Text="关于" FontSize="28" FontWeight="Bold" Margin="0,0,0,8"/>
-                            <StackPanel Margin="8,0,0,0">
-                                <TextBlock x:Name="AppNameText" Text="WinTimeBoard BETA"/>
-                                <!--<TextBlock x:Name="AppVersionText" Text="Ver 1.0.0" Margin="0,4,0,0"/>-->
-                                <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." Margin="0,8,0,0"/>
+                        <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Padding="12" Spacing="16" MinWidth="280">
+                                
+                                <!-- 外观设置 -->
+                                <StackPanel>
+                                    <TextBlock Text="外观设置" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                    
+                                    <!-- 主题模式 -->
+                                    <StackPanel Margin="8,0,0,0" Spacing="4">
+                                        <TextBlock Text="主题模式" FontSize="14" FontWeight="Medium" Margin="0,0,0,4"/>
+                                        <RadioButtons x:Name="ThemeRadioButtons" SelectionChanged="ThemeRadioButtons_SelectionChanged">
+                                            <RadioButton Content="跟随系统" Tag="FollowSystem" IsChecked="True"/>
+                                            <RadioButton Content="浅色模式" Tag="Light"/>
+                                            <RadioButton Content="深色模式" Tag="Dark"/>
+                                        </RadioButtons>
+                                    </StackPanel>
+                                    
+                                    <!-- 背景材质 -->
+                                    <StackPanel Margin="8,0,0,0" Spacing="4">
+                                        <TextBlock Text="背景材质" FontSize="14" FontWeight="Medium" Margin="0,8,0,4"/>
+                                        <RadioButtons x:Name="MaterialRadioButtons" SelectionChanged="MaterialRadioButtons_SelectionChanged">
+                                            <RadioButton Content="Mica" Tag="Mica" IsChecked="True"/>
+                                            <RadioButton Content="MicaAlt" Tag="MicaAlt"/>
+                                            <RadioButton Content="Acrylic" Tag="Acrylic"/>
+                                            <RadioButton Content="无背景" Tag="None"/>
+                                        </RadioButtons>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" Margin="-4,0"/>
+                                
+                                <!-- 时间显示设置 -->
+                                <StackPanel>
+                                    <TextBlock Text="时间显示" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                    
+                                    <StackPanel Margin="8,0,0,0" Spacing="8">
+                                        <Button x:Name="TimeFormatButton" 
+                                                Content="时间格式设置" 
+                                                HorizontalAlignment="Stretch"
+                                                Click="TimeFormatButton_Click"/>
+                                        <Button x:Name="DateFormatButton" 
+                                                Content="日期格式设置" 
+                                                HorizontalAlignment="Stretch"
+                                                Click="DateFormatButton_Click"/>
+                                        <Button x:Name="FontSettingsButton" 
+                                                Content="字体设置" 
+                                                HorizontalAlignment="Stretch"
+                                                Click="FontSettingsButton_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <Border Height="1" Background="{ThemeResource CardStrokeColorDefaultBrush}" Margin="-4,0"/>
+                                
+                                <!-- 关于 -->
+                                <StackPanel>
+                                    <TextBlock Text="关于" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                    <StackPanel Margin="8,0,0,0">
+                                        <TextBlock x:Name="AppNameText" Text="WinTimeBoard 1.1"/>
+                                        <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." 
+                                                  Margin="0,4,0,0" 
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
                             </StackPanel>
-                        </StackPanel>
+                        </ScrollViewer>
                     </Flyout>
                 </Button.Flyout>
             </Button>
