@@ -11,6 +11,7 @@
 
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="BaseAlt" />
+        <!-- 回退背景代码（好像没用了） -->
     </Window.SystemBackdrop>
 
     <Grid>
@@ -30,20 +31,22 @@
                     Height="40">
                 <Button.Flyout>
                     <Flyout Placement="Top" x:Name="MenuFlyout">
-                        <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer MaxHeight="800" VerticalScrollBarVisibility="Auto">
                             <StackPanel Padding="12" Spacing="16" MinWidth="280">
                                 
                                 <!-- 外观设置 -->
                                 <StackPanel>
                                     <TextBlock Text="外观设置" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                                    
+
+                                    <!-- 这里有奇奇怪怪的问题，暂时把这些选项给禁用了 -->
+
                                     <!-- 主题模式 -->
                                     <StackPanel Margin="8,0,0,0" Spacing="4">
                                         <TextBlock Text="主题模式" FontSize="14" FontWeight="Medium" Margin="0,0,0,4"/>
                                         <RadioButtons x:Name="ThemeRadioButtons" SelectionChanged="ThemeRadioButtons_SelectionChanged">
                                             <RadioButton Content="跟随系统" Tag="FollowSystem" IsChecked="True"/>
-                                            <RadioButton Content="浅色模式" Tag="Light"/>
-                                            <RadioButton Content="深色模式" Tag="Dark"/>
+                                            <RadioButton Content="浅色模式" Tag="Light" IsEnabled="False"/>
+                                            <RadioButton Content="深色模式" Tag="Dark" IsEnabled="False"/>
                                         </RadioButtons>
                                     </StackPanel>
                                     
@@ -54,7 +57,7 @@
                                             <RadioButton Content="Mica" Tag="Mica" IsChecked="True"/>
                                             <RadioButton Content="MicaAlt" Tag="MicaAlt"/>
                                             <RadioButton Content="Acrylic" Tag="Acrylic"/>
-                                            <RadioButton Content="无背景" Tag="None"/>
+                                            <RadioButton Content="无背景" Tag="None" IsEnabled="False"/>
                                         </RadioButtons>
                                     </StackPanel>
                                 </StackPanel>
@@ -99,10 +102,26 @@
                     </Flyout>
                 </Button.Flyout>
             </Button>
-
         </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12"  Spacing="8">
+            <!--
+                TODO: 增加启动器功能
+                推荐大家用 ReSharper for VS2026 修改代码，我这里很多代码都是用它按 Tab 按出来的（比如上面一行）（JB快付我广告费[doge]）
+            -->
+            <Button x:Name="LauncherButton" 
+                    IsEnabled="False"
+                    Style="{StaticResource AccentButtonStyle}"
+                    FontFamily="Segoe Fluent Icons"
+                    Content="&#xE8FC;"
+                    Width="40"
+                    Height="40"
+            />
+        </StackPanel>
+
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12" Spacing="8">
             <Button x:Name="HideButton"
+                    Style="{StaticResource SubtleButtonStyle}"
                     Click="HideButton_Click"
                     FontFamily="Segoe Fluent Icons"
                     Content="&#xED1A;"
@@ -111,6 +130,7 @@
             />
 
             <Button x:Name="ExitButton"
+                    Style="{StaticResource SubtleButtonStyle}"
                     Click="ExitButton_Click"
                     FontFamily="Segoe Fluent Icons"
                     Content="&#xE711;"

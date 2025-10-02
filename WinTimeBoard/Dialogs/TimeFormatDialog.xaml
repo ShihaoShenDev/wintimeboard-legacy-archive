@@ -12,6 +12,7 @@
     CloseButtonText="取消"
     DefaultButton="Primary">
 
+    <!-- 很奇怪，OverlayCornerRadius 属性一用上去就打不开，在 StackPanel 里加和在外面套 Grid 都一样 -->
     <StackPanel Spacing="16" MinWidth="350">
         <TextBlock Text="选择时间显示格式" FontSize="14" />
         
