@@ -45,8 +45,8 @@
                                         <TextBlock Text="主题模式" FontSize="14" FontWeight="Medium" Margin="0,0,0,4"/>
                                         <RadioButtons x:Name="ThemeRadioButtons" SelectionChanged="ThemeRadioButtons_SelectionChanged">
                                             <RadioButton Content="跟随系统" Tag="FollowSystem" IsChecked="True"/>
-                                            <RadioButton Content="浅色模式" Tag="Light" IsEnabled="False"/>
-                                            <RadioButton Content="深色模式" Tag="Dark" IsEnabled="False"/>
+                                            <RadioButton Content="浅色" Tag="Light" IsEnabled="False"/>
+                                            <RadioButton Content="深色" Tag="Dark" IsEnabled="False"/>
                                         </RadioButtons>
                                     </StackPanel>
                                     
@@ -54,10 +54,11 @@
                                     <StackPanel Margin="8,0,0,0" Spacing="4">
                                         <TextBlock Text="背景材质" FontSize="14" FontWeight="Medium" Margin="0,8,0,4"/>
                                         <RadioButtons x:Name="MaterialRadioButtons" SelectionChanged="MaterialRadioButtons_SelectionChanged">
-                                            <RadioButton Content="Mica" Tag="Mica" IsChecked="True"/>
-                                            <RadioButton Content="MicaAlt" Tag="MicaAlt"/>
-                                            <RadioButton Content="Acrylic" Tag="Acrylic"/>
-                                            <RadioButton Content="无背景" Tag="None" IsEnabled="False"/>
+                                            <RadioButton Content="云母" Tag="Mica" IsChecked="True"/>
+                                            <RadioButton Content="亚克力" Tag="Acrylic"/>
+                                            <RadioButton Content="Tabbed" Tag="MicaAlt"/>
+                                            <RadioButton Content="薄亚克力" Tag="AcrylicThin" IsEnabled="False"/>
+                                            <RadioButton Content="无" Tag="None" IsEnabled="False"/>
                                         </RadioButtons>
                                     </StackPanel>
                                 </StackPanel>
