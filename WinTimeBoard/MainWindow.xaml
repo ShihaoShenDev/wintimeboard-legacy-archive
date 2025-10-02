@@ -25,10 +25,11 @@
         <!-- Bottom-left button group (stacked horizontally to the left) -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="12" Spacing="8">
             <Button x:Name="MenuButton"
-                    FontFamily="Segoe Fluent Icons"
-                    Content="&#xE700;"
-                    Width="40"
-                    Height="40">
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE700;"/>
+                </Button.Content>
                 <Button.Flyout>
                     <Flyout Placement="Top" x:Name="MenuFlyout">
                         <ScrollViewer MaxHeight="800" VerticalScrollBarVisibility="Auto">
@@ -38,7 +39,7 @@
                                 <StackPanel>
                                     <TextBlock Text="外观设置" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
 
-                                    <!-- 这里有奇奇怪怪的问题，暂时把这些选项给禁用了 -->
+                                    <!-- 这里有奇奇怪怪的问题，暂时把这些选项给禁用了（亮暗色先开着吧，学校里要用） -->
 
                                     <!-- 主题模式 -->
                                     <StackPanel Margin="8,0,0,0" Spacing="4">
@@ -46,7 +47,7 @@
                                         <RadioButtons x:Name="ThemeRadioButtons" SelectionChanged="ThemeRadioButtons_SelectionChanged">
                                             <RadioButton Content="跟随系统" Tag="FollowSystem" IsChecked="True"/>
                                             <RadioButton Content="浅色" Tag="Light" IsEnabled="False"/>
-                                            <RadioButton Content="深色" Tag="Dark" IsEnabled="False"/>
+                                            <RadioButton Content="深色" Tag="Dark"/>
                                         </RadioButtons>
                                     </StackPanel>
                                     
@@ -58,7 +59,7 @@
                                             <RadioButton Content="亚克力" Tag="Acrylic"/>
                                             <RadioButton Content="Tabbed" Tag="MicaAlt"/>
                                             <RadioButton Content="薄亚克力" Tag="AcrylicThin" IsEnabled="False"/>
-                                            <RadioButton Content="无" Tag="None" IsEnabled="False"/>
+                                            <RadioButton Content="无" Tag="None"/>
                                         </RadioButtons>
                                     </StackPanel>
                                 </StackPanel>
@@ -113,31 +114,34 @@
             <Button x:Name="LauncherButton" 
                     IsEnabled="False"
                     Style="{StaticResource AccentButtonStyle}"
-                    FontFamily="Segoe Fluent Icons"
-                    Content="&#xE8FC;"
-                    Width="40"
-                    Height="40"
-            />
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE8FC;"/>
+                </Button.Content>
+            </Button>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12" Spacing="8">
             <Button x:Name="HideButton"
                     Style="{StaticResource SubtleButtonStyle}"
                     Click="HideButton_Click"
-                    FontFamily="Segoe Fluent Icons"
-                    Content="&#xED1A;"
-                    Width="40"
-                    Height="40"
-            />
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xED1A;"/>
+                </Button.Content>
+            </Button>
 
             <Button x:Name="ExitButton"
                     Style="{StaticResource SubtleButtonStyle}"
                     Click="ExitButton_Click"
-                    FontFamily="Segoe Fluent Icons"
-                    Content="&#xE711;"
-                    Width="40"
-                    Height="40"
-            />
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE711;" />
+                </Button.Content>
+                </Button>
         </StackPanel>
     </Grid>
 </Window>
