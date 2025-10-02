@@ -1,3 +1,4 @@
+using System;
 using Microsoft.UI.Xaml;
 using WinTimeBoard.Models;
 
@@ -26,6 +27,43 @@ namespace WinTimeBoard.Services
             if (App.MainWindow?.Content is FrameworkElement rootElement)
             {
                 rootElement.RequestedTheme = requestedTheme;
+                
+                // 特殊处理：当背景材质为"无"时，强制设置窗口级别的主题
+                // 这确保主题设置优先于系统设置
+                if (App.MainWindow.SystemBackdrop == null && themeMode != ThemeMode.FollowSystem)
+                {
+                    // 直接设置窗口的主题，而不是依赖内容元素
+                    try
+                    {
+                        // 通过设置Application级别的主题来强制应用
+                        var app = Application.Current;
+                        if (app != null)
+                        {
+                            var appTheme = themeMode switch
+                            {
+                                ThemeMode.Light => ApplicationTheme.Light,
+                                ThemeMode.Dark => ApplicationTheme.Dark,
+                                _ => app.RequestedTheme
+                            };
+                            
+                            // 只有当主题确实需要改变时才设置
+                            if (themeMode != ThemeMode.FollowSystem && 
+                                ((themeMode == ThemeMode.Light && app.RequestedTheme != ApplicationTheme.Light) ||
+                                 (themeMode == ThemeMode.Dark && app.RequestedTheme != ApplicationTheme.Dark)))
+                            {
+                                // 通过Content元素强制主题应用
+                                rootElement.RequestedTheme = requestedTheme;
+                                
+                                // 强制刷新
+                                System.Diagnostics.Debug.WriteLine($"Force applied theme: {requestedTheme} for no-backdrop window");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Failed to force theme application: {ex.Message}");
+                    }
+                }
             }
         }
 

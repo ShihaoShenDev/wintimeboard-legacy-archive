@@ -10,6 +10,95 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- 自定义ContentDialog样式 -->
+            <Style TargetType="ContentDialog">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentDialog">
+                            <Border x:Name="Container"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="8"
+                                    Padding="{TemplateBinding Padding}">
+                                <Grid x:Name="DialogSpace">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- 内容区域 -->
+                                    <ScrollViewer x:Name="ContentScrollViewer"
+                                                  Grid.Row="0"
+                                                  HorizontalScrollBarVisibility="Disabled"
+                                                  VerticalScrollBarVisibility="Disabled"
+                                                  ZoomMode="Disabled"
+                                                  Margin="24,24,24,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <ContentControl x:Name="Title"
+                                                          Grid.Row="0"
+                                                          Content="{TemplateBinding Title}"
+                                                          ContentTemplate="{TemplateBinding TitleTemplate}"
+                                                          FontSize="20"
+                                                          FontFamily="{ThemeResource ContentControlThemeFontFamily}"
+                                                          FontWeight="SemiBold"
+                                                          Foreground="{TemplateBinding Foreground}"
+                                                          HorizontalAlignment="Left"
+                                                          VerticalAlignment="Top"
+                                                          IsTabStop="False" />
+                                            <ContentPresenter x:Name="Content"
+                                                            Grid.Row="1"
+                                                            Content="{TemplateBinding Content}"
+                                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                            FontSize="14"
+                                                            FontFamily="{ThemeResource ContentControlThemeFontFamily}"
+                                                            Foreground="{TemplateBinding Foreground}"
+                                                            LineHeight="20"
+                                                            TextWrapping="Wrap"
+                                                            Margin="0,16,0,0" />
+                                        </Grid>
+                                    </ScrollViewer>
+                                    
+                                    <!-- 按钮区域 -->
+                                    <Grid x:Name="CommandSpace"
+                                          Grid.Row="1"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Bottom"
+                                          Background="{ThemeResource ContentDialogTopOverlay}"
+                                          Padding="24,16,24,24">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button x:Name="PrimaryButton"
+                                                Grid.Column="1"
+                                                Content="{TemplateBinding PrimaryButtonText}"
+                                                IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
+                                                Style="{StaticResource AccentButtonStyle}"
+                                                CornerRadius="4"
+                                                HorizontalAlignment="Stretch"
+                                                Margin="4,0,0,0" />
+                                        <Button x:Name="CloseButton"
+                                                Grid.Column="2"
+                                                Content="{TemplateBinding CloseButtonText}"
+                                                CornerRadius="4"
+                                                HorizontalAlignment="Stretch"
+                                                Margin="4,0,0,0" />
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
             <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>

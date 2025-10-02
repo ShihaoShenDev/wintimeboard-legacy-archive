@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -183,7 +184,8 @@ namespace WinTimeBoard
             {
                 var settings = App.SettingsService.CurrentSettings;
                 
-                // 设置主题选项
+                // 设置主题选项（避免触发SelectionChanged事件）
+                _isInitialized = false;
                 foreach (RadioButton radio in ThemeRadioButtons.Items)
                 {
                     if (radio.Tag?.ToString() == settings.Theme.Mode.ToString())
@@ -193,7 +195,7 @@ namespace WinTimeBoard
                     }
                 }
                 
-                // 设置背景材质选项
+                // 设置背景材质选项（避免触发SelectionChanged事件）
                 foreach (RadioButton radio in MaterialRadioButtons.Items)
                 {
                     if (radio.Tag?.ToString() == settings.Material.Material.ToString())
@@ -202,10 +204,13 @@ namespace WinTimeBoard
                         break;
                     }
                 }
+                _isInitialized = true;
             }
-            catch
+            catch (Exception ex)
             {
-                // 忽略初始化错误
+                // 使用默认设置，忽略初始化错误
+                System.Diagnostics.Debug.WriteLine($"InitializeSettingsMenu failed: {ex.Message}");
+                _isInitialized = true;
             }
         }
         
@@ -241,24 +246,60 @@ namespace WinTimeBoard
         {
             try
             {
+                // 使用批处理更新机制，避免闪烁
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    // 应用主题
-                    App.ThemeService.ApplyTheme(settings.Theme.Mode);
+                    // 暂时禁用初始化标志，避免递归调用
+                    var wasInitialized = _isInitialized;
+                    _isInitialized = false;
                     
-                    // 应用背景材质
-                    App.MaterialService.ApplyMaterial(this, settings.Material.Material);
-                    
-                    // 应用字体设置
-                    ApplyFontSettings();
-                    
-                    // 更新菜单选项
-                    InitializeSettingsMenu();
+                    try
+                    {
+                        // 先更新菜单状态
+                        UpdateMenuStates(settings);
+                        
+                        // 再应用主题和材质
+                        App.ThemeService.ApplyTheme(settings.Theme.Mode);
+                        App.MaterialService.ApplyMaterial(this, settings.Material.Material);
+                        
+                        // 最后应用字体设置
+                        ApplyFontSettings();
+                    }
+                    finally
+                    {
+                        // 恢复初始化标志
+                        _isInitialized = wasInitialized;
+                    }
                 });
             }
-            catch
+            catch (Exception ex)
             {
-                // 忽略设置应用错误
+                System.Diagnostics.Debug.WriteLine($"OnSettingsChanged failed: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// 更新菜单状态（不触发事件）
+        /// </summary>
+        private void UpdateMenuStates(AppSettings settings)
+        {
+            try
+            {
+                // 更新主题选项
+                foreach (RadioButton radio in ThemeRadioButtons.Items)
+                {
+                    radio.IsChecked = radio.Tag?.ToString() == settings.Theme.Mode.ToString();
+                }
+                
+                // 更新背景材质选项
+                foreach (RadioButton radio in MaterialRadioButtons.Items)
+                {
+                    radio.IsChecked = radio.Tag?.ToString() == settings.Material.Material.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"UpdateMenuStates failed: {ex.Message}");
             }
         }
         
@@ -274,11 +315,13 @@ namespace WinTimeBoard
             {
                 var themeModeString = selectedRadio.Tag?.ToString() ?? "FollowSystem";
                 var themeMode = App.ThemeService.ParseThemeMode(themeModeString);
-                await App.SettingsService.UpdateThemeAsync(themeMode);
+                
+                // 使用平滑过渡更新，避免闪烁
+                await ApplySmoothThemeChange(themeMode);
             }
-            catch
+            catch (Exception ex)
             {
-                // 忽略错误
+                System.Diagnostics.Debug.WriteLine($"ThemeRadioButtons_SelectionChanged failed: {ex.Message}");
             }
         }
         
@@ -294,11 +337,47 @@ namespace WinTimeBoard
             {
                 var materialString = selectedRadio.Tag?.ToString() ?? "Mica";
                 var material = App.MaterialService.ParseMaterial(materialString);
+                
+                // 使用平滑过渡更新，避免闪烁
+                await ApplySmoothMaterialChange(material);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"MaterialRadioButtons_SelectionChanged failed: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// 平滑主题切换
+        /// </summary>
+        private async Task ApplySmoothThemeChange(ThemeMode themeMode)
+        {
+            try
+            {
+                // 批处理更新，避免中间状态
+                await Task.Delay(10); // 等待UI线程稳定
+                await App.SettingsService.UpdateThemeAsync(themeMode);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ApplySmoothThemeChange failed: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// 平滑材质切换
+        /// </summary>
+        private async Task ApplySmoothMaterialChange(BackgroundMaterial material)
+        {
+            try
+            {
+                // 批处理更新，避免中间状态
+                await Task.Delay(10); // 等待UI线程稳定
                 await App.SettingsService.UpdateMaterialAsync(material);
             }
-            catch
+            catch (Exception ex)
             {
-                // 忽略错误
+                System.Diagnostics.Debug.WriteLine($"ApplySmoothMaterialChange failed: {ex.Message}");
             }
         }
         

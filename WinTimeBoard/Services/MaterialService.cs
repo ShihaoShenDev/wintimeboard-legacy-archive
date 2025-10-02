@@ -1,3 +1,4 @@
+using System;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
@@ -31,6 +32,25 @@ namespace WinTimeBoard.Services
                 BackgroundMaterial.None => null,
                 _ => new Microsoft.UI.Xaml.Media.MicaBackdrop { Kind = Microsoft.UI.Composition.SystemBackdrops.MicaKind.Base }
             };
+            
+            // 背景材质变更后，重新应用当前主题设置
+            // 这确保无背景时主题能正确应用
+            try
+            {
+                var currentSettings = App.SettingsService.CurrentSettings;
+                if (currentSettings != null)
+                {
+                    // 延迟应用主题，确保材质切换完成
+                    App.MainWindow?.DispatcherQueue.TryEnqueue(() =>
+                    {
+                        App.ThemeService.ApplyTheme(currentSettings.Theme.Mode);
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to reapply theme after material change: {ex.Message}");
+            }
         }
 
         /// <summary>
