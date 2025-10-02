@@ -10,7 +10,7 @@
   <Identity
     Name="ShihaoShen.WinTimeBoard.WinUI"
     Publisher="CN=Shihao Shen"
-    Version="1.0.7.0" />
+    Version="1.1.10.0" />
 
   <mp:PhoneIdentity PhoneProductId="6200f5c1-5a0c-48a5-9aac-4f2933a0eab2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
