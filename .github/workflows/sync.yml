@@ -1,0 +1,20 @@
+name: Sync from GitLab upstream
+on:
+  schedule:
+    - cron:  '* * * * *'
+  workflow_dispatch:
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge upstream
+        run: |
+          git config --global user.name 'Shihao Shen'
+          git config --global user.email 'shihao-s@outlook.com'
+          git config --global credential.helper store
+          git clone https://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@github.com/ShihaoShenDev/WinTimeBoard.git tmp
+          cd tmp
+          git remote add upstream https://glpat-PQiv7r6AQ1l-XWlJ2cweCW86MQp1OmJ5Y3J5Cw.01.120ckatva@gitlab.com/ShihaoShen/WinTimeBoard.git
+          git fetch upstream
+          git merge upstream/master
+          git push origin master          
