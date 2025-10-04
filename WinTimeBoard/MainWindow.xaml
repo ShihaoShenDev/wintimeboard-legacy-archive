@@ -9,6 +9,11 @@
     mc:Ignorable="d"
     Title="WinTimeBoard">
 
+    <!--
+        随便说说：
+        这里的很多代码都是使用 Qoder 的 Quest 模式生成的，代码质量不错[doge]
+        同时此项目参考了 WinUI 3 Gallery 的一些示例代码
+    -->
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="BaseAlt" />
         <!-- 回退背景代码（好像没用了） -->
@@ -24,13 +29,14 @@
 
         <!-- Bottom-left button group (stacked horizontally to the left) -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="12" Spacing="8">
-            <Button x:Name="MenuButton"
-                    Width="64"
+            <DropDownButton x:Name="MenuButton" 
+                    Width="120"
                     Height="64">
-                <Button.Content>
+                <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE700;"/>
-                </Button.Content>
-                <Button.Flyout>
+                    <TextBlock Text=" 菜单"/>
+                </StackPanel>
+                <DropDownButton.Flyout>
                     <Flyout Placement="Top" x:Name="MenuFlyout">
                         <ScrollViewer MaxHeight="800" VerticalScrollBarVisibility="Auto">
                             <StackPanel Padding="12" Spacing="16" MinWidth="280">
@@ -92,7 +98,7 @@
                                 <StackPanel>
                                     <TextBlock Text="关于" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
                                     <StackPanel Margin="8,0,0,0">
-                                        <TextBlock x:Name="AppNameText" Text="WinTimeBoard 1.1"/>
+                                        <TextBlock x:Name="AppNameText" Text="WinTimeBoard 1.2"/>
                                         <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." 
                                                   Margin="0,4,0,0" 
                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
@@ -102,8 +108,8 @@
                             </StackPanel>
                         </ScrollViewer>
                     </Flyout>
-                </Button.Flyout>
-            </Button>
+                </DropDownButton.Flyout>
+            </DropDownButton>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12"  Spacing="8">
@@ -119,6 +125,25 @@
                 <Button.Content>
                     <FontIcon Glyph="&#xE8FC;"/>
                 </Button.Content>
+                <Button.Flyout>
+                    <Flyout Placement="Top">
+                        <ScrollViewer MaxHeight="800" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Padding="12" Spacing="16" MinWidth="280">
+                                <!-- 关于 -->
+                                <StackPanel>
+                                    <TextBlock Text="关于" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                    <StackPanel Margin="8,0,0,0">
+                                        <TextBlock Text="WinTimeBoard 1.1"/>
+                                        <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." 
+                          Margin="0,4,0,0" 
+                          Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Flyout>
+                </Button.Flyout>
             </Button>
         </StackPanel>
 
@@ -126,21 +151,23 @@
             <Button x:Name="HideButton"
                     Style="{StaticResource SubtleButtonStyle}"
                     Click="HideButton_Click"
-                    Width="64"
+                    Width="96"
                     Height="64">
-                <Button.Content>
+                <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xED1A;"/>
-                </Button.Content>
+                    <TextBlock Text=" 隐藏"/>
+                </StackPanel>
             </Button>
 
             <Button x:Name="ExitButton"
                     Style="{StaticResource SubtleButtonStyle}"
                     Click="ExitButton_Click"
-                    Width="64"
+                    Width="96"
                     Height="64">
-                <Button.Content>
-                    <FontIcon Glyph="&#xE711;" />
-                </Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE711;"/>
+                    <TextBlock Text=" 退出"/>
+                </StackPanel>
                 </Button>
         </StackPanel>
     </Grid>
