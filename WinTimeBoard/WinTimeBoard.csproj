@@ -68,6 +68,6 @@
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <PackageCertificateThumbprint>2F6100B2BD793482868A5FD33222FA2BF012C9EE</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>D8263386FA41E0AB36FB6A99CBC46755730F314E</PackageCertificateThumbprint>
   </PropertyGroup>
 </Project>

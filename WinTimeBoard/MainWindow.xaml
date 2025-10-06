@@ -117,6 +117,14 @@
                 TODO: 增加启动器功能
                 推荐大家用 ReSharper for VS2026 修改代码，我这里很多代码都是用它按 Tab 按出来的（比如上面一行）（JB快付我广告费[doge]）
             -->
+            <Button x:Name="TimeButton" 
+                    Style="{StaticResource AccentButtonStyle}"
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xEC92;"/>
+                </Button.Content>
+            </Button>
             <Button x:Name="LauncherButton" 
                     IsEnabled="False"
                     Style="{StaticResource AccentButtonStyle}"
@@ -125,25 +133,24 @@
                 <Button.Content>
                     <FontIcon Glyph="&#xE8FC;"/>
                 </Button.Content>
-                <Button.Flyout>
-                    <Flyout Placement="Top">
-                        <ScrollViewer MaxHeight="800" VerticalScrollBarVisibility="Auto">
-                            <StackPanel Padding="12" Spacing="16" MinWidth="280">
-                                <!-- 关于 -->
-                                <StackPanel>
-                                    <TextBlock Text="关于" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                                    <StackPanel Margin="8,0,0,0">
-                                        <TextBlock Text="WinTimeBoard 1.1"/>
-                                        <TextBlock Text="Copyright © 2025 Shihao Shen. All rights reserved." 
-                          Margin="0,4,0,0" 
-                          Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                    </StackPanel>
-                                </StackPanel>
-
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Flyout>
-                </Button.Flyout>
+            </Button>
+            <Button x:Name="StopWatchButton" 
+                    IsEnabled="False"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE916;"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="TimerButton" 
+                    IsEnabled="False"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Width="64"
+                    Height="64">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE823;"/>
+                </Button.Content>
             </Button>
         </StackPanel>
 
